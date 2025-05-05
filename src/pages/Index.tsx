@@ -24,27 +24,27 @@ const Index = () => {
   }, []);
 
   return (
-    <HelmetProvider>
-      <div className="min-h-screen">
+    <div className="min-h-screen">
+      <HelmetProvider>
         <Metadata />
-        <Navbar />
-        <main>
-          <Hero />
-          <WhyAttend />
-          <VideoSection />
-          <Agenda />
-          <ProductDemo />
-          <KpiSection />
-          <ComparisonTable />
-          <FinalCta />
-          <FaqSection />
-          <FloatingCta />
-          <StickyBar />
-          <ExitIntent />
-        </main>
-        <Footer />
-      </div>
-    </HelmetProvider>
+      </HelmetProvider>
+      <Navbar />
+      <main>
+        <Hero />
+        <WhyAttend />
+        <VideoSection />
+        <Agenda />
+        <ProductDemo />
+        <KpiSection />
+        <ComparisonTable />
+        <FinalCta />
+        <FaqSection />
+        <FloatingCta />
+        <StickyBar />
+        <ExitIntent />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
