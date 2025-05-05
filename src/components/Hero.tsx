@@ -1,13 +1,43 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
+
+// Workshop date: June 11, 2025 at 11:00 AM EST
+const WORKSHOP_DATE = new Date('2025-06-11T11:00:00-04:00');
 
 const Hero = () => {
   const ctaButtonRef = useRef<HTMLButtonElement>(null);
-
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+  
+  // Calculate time left until workshop
   useEffect(() => {
-    // Add pulse effect to CTA button every 5 seconds
+    const calculateTimeLeft = () => {
+      const difference = WORKSHOP_DATE.getTime() - new Date().getTime();
+      
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        });
+      }
+    };
+    
+    calculateTimeLeft(); // Calculate immediately
+    const timer = setInterval(calculateTimeLeft, 1000);
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  // Add pulse effect to CTA button
+  useEffect(() => {
     const interval = setInterval(() => {
       if (ctaButtonRef.current) {
         ctaButtonRef.current.classList.add('animate-pulse-glow');
@@ -45,6 +75,35 @@ const Hero = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto">
+        {/* Countdown timer */}
+        <div className="mb-8 flex justify-center">
+          <div className="bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 flex items-center gap-2 text-white animate-fade-in">
+            <Clock size={18} className="text-dd-green" />
+            <span className="font-medium">Starts in:</span>
+            <div className="grid grid-flow-col gap-1 text-center auto-cols-max">
+              <div className="flex flex-col p-1 bg-navy-800 rounded-md">
+                <span className="font-mono text-xl">{String(timeLeft.days).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-300">days</span>
+              </div>
+              <span className="text-xl">:</span>
+              <div className="flex flex-col p-1 bg-navy-800 rounded-md">
+                <span className="font-mono text-xl">{String(timeLeft.hours).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-300">hrs</span>
+              </div>
+              <span className="text-xl">:</span>
+              <div className="flex flex-col p-1 bg-navy-800 rounded-md">
+                <span className="font-mono text-xl">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-300">min</span>
+              </div>
+              <span className="text-xl">:</span>
+              <div className="flex flex-col p-1 bg-navy-800 rounded-md">
+                <span className="font-mono text-xl">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-300">sec</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="text-white space-y-6">
             {/* Animation: Fade in from left */}
@@ -57,6 +116,27 @@ const Hero = () => {
               Join our expert-led workshop and discover how AI is helping finance teams eliminate overpayments and streamline processes.
             </p>
             
+            <div className="mt-2 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 opacity-0 animate-fade-in animate-delay-200">
+              <div className="flex items-center">
+                <div className="bg-navy-800/60 backdrop-blur-sm rounded-lg p-2 flex items-center animate-float">
+                  <span className="text-dd-green text-xl mr-2">📅</span>
+                  <span>June 11, 2025</span>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="bg-navy-800/60 backdrop-blur-sm rounded-lg p-2 flex items-center animate-float" style={{ animationDelay: '0.2s' }}>
+                  <span className="text-dd-green text-xl mr-2">⏰</span>
+                  <span>11:00 AM EST</span>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="bg-navy-800/60 backdrop-blur-sm rounded-lg p-2 flex items-center animate-float" style={{ animationDelay: '0.4s' }}>
+                  <span className="text-dd-green text-xl mr-2">⌛</span>
+                  <span>1 Hour</span>
+                </div>
+              </div>
+            </div>
+            
             {/* Animation: Slide up with delay */}
             <div className="pt-4 opacity-0 animate-fade-in-up animate-delay-300">
               <Button 
@@ -67,7 +147,14 @@ const Hero = () => {
                 Reserve My Spot <ArrowRight className="ml-2" size={18} />
               </Button>
               
-              <p className="mt-4 text-gray-200 text-sm">Free registration • Limited seats • Includes $20K+ worth of insights</p>
+              <p className="mt-4 text-gray-200 text-sm">Free registration • Limited to 200 seats • Includes $20K+ worth of insights</p>
+            </div>
+            
+            {/* Target audience label */}
+            <div className="pt-2 opacity-0 animate-fade-in animate-delay-500">
+              <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-sm">
+                Unlock AI-Driven Insights in AP in Just 60 Minutes
+              </div>
             </div>
           </div>
 

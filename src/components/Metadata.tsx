@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 export const Metadata = () => {
   return (
@@ -20,6 +20,10 @@ export const Metadata = () => {
       <meta property="twitter:url" content="https://discoverdollar.com/workshop" />
       <meta property="twitter:title" content="AP AI Workshop | Discover Dollar Shield" />
       <meta property="twitter:description" content="Join our expert-led workshop to learn how AI is transforming accounts payable and helping finance teams recover millions in overpayments." />
+      
+      {/* Custom font preload */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
     </Helmet>
   );
 };

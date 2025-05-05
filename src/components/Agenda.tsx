@@ -1,20 +1,25 @@
 
 import React, { useRef, useEffect } from 'react';
+import { FileText, Clock, Calendar, Users } from 'lucide-react';
 
 const agendaItems = [
   {
+    icon: <FileText className="text-navy-600" size={24} />,
     title: "AI for AP: Beyond automation, into anomaly detection",
     description: "Discover how modern AI goes beyond basic automation to detect complex patterns and anomalies in your AP data."
   },
   {
+    icon: <Clock className="text-navy-600" size={24} />,
     title: "Overpayment scenarios with real-world impact",
     description: "Learn about the most common (and costly) overpayment scenarios we've discovered across industries."
   },
   {
+    icon: <Calendar className="text-navy-600" size={24} />,
     title: "How Discover Shield plugs into your workflow",
     description: "See how our solution integrates seamlessly with your existing AP systems without disrupting workflows."
   },
   {
+    icon: <Users className="text-navy-600" size={24} />,
     title: "Live walkthrough: Upload. Detect. Recover.",
     description: "Watch a live demonstration of how the platform works using real (anonymized) AP data from a Fortune 500 company."
   }
@@ -28,10 +33,12 @@ const Agenda = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            setTimeout(() => {
-              el.classList.add('animate-fade-in-up');
-            }, parseInt(el.dataset.delay || '0'));
+            const items = entry.target.querySelectorAll('.agenda-item');
+            items.forEach((item, index) => {
+              setTimeout(() => {
+                item.classList.add('opacity-100', 'translate-y-0');
+              }, index * 150);
+            });
             observer.unobserve(entry.target);
           }
         });
@@ -39,15 +46,14 @@ const Agenda = () => {
       { threshold: 0.1 }
     );
 
-    const timelineItems = timelineRef.current?.querySelectorAll('.timeline-item');
-    timelineItems?.forEach((el) => {
-      observer.observe(el);
-    });
+    if (timelineRef.current) {
+      observer.observe(timelineRef.current);
+    }
 
     return () => {
-      timelineItems?.forEach((el) => {
-        observer.unobserve(el);
-      });
+      if (timelineRef.current) {
+        observer.unobserve(timelineRef.current);
+      }
     };
   }, []);
 
@@ -61,29 +67,26 @@ const Agenda = () => {
           </p>
         </div>
 
-        <div ref={timelineRef} className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-navy-200 z-0"></div>
-
+        <div ref={timelineRef} className="space-y-6">
           {agendaItems.map((item, index) => (
             <div 
               key={index} 
-              className={`timeline-item relative z-10 mb-12 flex flex-col md:flex-row opacity-0`}
-              data-delay={index * 150}
+              className="agenda-item bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex gap-4 opacity-0 translate-y-8 transition-all duration-500 hover:shadow-md hover:bg-gray-50"
             >
-              <div className={`md:w-1/2 md:pr-8 ${index % 2 === 0 ? 'md:text-right' : 'md:order-last md:pl-8 md:text-left'}`}>
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                  <div className="flex items-center mb-3">
-                    <div className={`h-8 w-8 flex items-center justify-center rounded-full bg-navy text-white font-bold mr-2 ${index % 2 === 0 ? 'md:order-last md:ml-2 md:mr-0' : ''}`}>
-                      {index + 1}
-                    </div>
-                    <h3 className="text-xl font-semibold text-navy-800">{item.title}</h3>
-                  </div>
-                  <p className="text-gray-600">{item.description}</p>
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-navy-50 flex items-center justify-center">
+                  {item.icon}
                 </div>
               </div>
-
-              <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1 w-4 h-4 rounded-full bg-dd-green border-4 border-white shadow"></div>
+              <div>
+                <div className="flex items-center mb-1">
+                  <div className="h-6 w-6 rounded-full bg-navy text-white font-semibold flex items-center justify-center text-sm mr-3">
+                    {index + 1}
+                  </div>
+                  <h3 className="text-xl font-semibold text-navy-800">{item.title}</h3>
+                </div>
+                <p className="text-gray-600 ml-9">{item.description}</p>
+              </div>
             </div>
           ))}
         </div>

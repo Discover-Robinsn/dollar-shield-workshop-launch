@@ -80,7 +80,11 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border scroll-smooth;
+  }
+
+  html {
+    @apply scroll-smooth;
   }
 
   body {
@@ -124,18 +128,122 @@
   }
 
   .feature-card {
-    @apply bg-white rounded-lg p-6 shadow-sm transition-all duration-300;
+    @apply bg-white rounded-xl p-6 shadow-sm transition-all duration-300;
   }
 
   .feature-card:hover {
-    @apply shadow-md bg-gray-50;
+    @apply shadow-md bg-gray-50 transform scale-105;
   }
 
   .feature-card:hover .feature-icon {
-    @apply scale-110;
+    @apply scale-110 text-[#00a8a8];
   }
 
   .feature-icon {
-    @apply text-navy-600 mb-4 transition-transform duration-300;
+    @apply text-dd-green mb-4 transition-all duration-300;
+  }
+  
+  /* New animations */
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out;
+  }
+  
+  @keyframes pulse-glow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+  }
+  
+  /* Premium hover effects */
+  .premium-button {
+    @apply rounded-xl shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md;
+  }
+  
+  /* Float animation for date/time boxes */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+  
+  /* Accordion animations */
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  .accordion-content.open {
+    max-height: 500px;
+  }
+  
+  .accordion-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .accordion-icon.open {
+    transform: rotate(180deg);
+  }
+  
+  /* Check mark animation */
+  .check-animation {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .check-animation.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Table row hover effect */
+  .table-row-hover {
+    @apply transition-colors duration-200;
+  }
+  
+  .table-row-hover:hover {
+    @apply bg-gray-50;
+  }
+  
+  .table-row-hover:hover .table-icon {
+    @apply text-[#00a8a8] transform scale-110;
+  }
+  
+  /* Form focus states */
+  .form-input-premium {
+    @apply rounded-lg border border-gray-200 transition-all duration-300 focus:ring-2 focus:ring-[#00a8a8]/30 focus:border-[#00a8a8];
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 }
