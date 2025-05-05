@@ -1,6 +1,7 @@
 {
   "name": "vite_react_shadcn_ts",
   "private": true,
+  "homepage": "https://discover-robinsn.github.io/dollar-shield-workshop-launch",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
