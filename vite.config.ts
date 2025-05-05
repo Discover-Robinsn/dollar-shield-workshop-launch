@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  base: '/dollar-shield-workshop-launch/',
   plugins: [
     react(),
     mode === 'development' &&
