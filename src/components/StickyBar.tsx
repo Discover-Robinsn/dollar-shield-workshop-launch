@@ -31,13 +31,13 @@ const StickyBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row justify-between items-center">
         <div className="text-white mb-3 sm:mb-0">
           <p className="font-medium">Limited workshop seats available</p>
-          <p className="text-sm text-gray-300">Includes complimentary AP leakage analysis</p>
+          <p className="text-sm text-gray-300">📅 June 11 | 11:00 AM EST / 8:30 PM IST</p>
         </div>
         <Button 
-          className="bg-dd-green hover:bg-dd-green-600 text-white font-medium px-6 py-3 rounded-lg flex items-center gap-2 hover-rise"
+          className="bg-gradient-to-r from-dd-green to-[#00a8a8] hover:from-[#00a8a8] hover:to-dd-green text-white font-medium px-6 py-3 rounded-lg flex items-center gap-2 hover-rise"
           onClick={() => document.getElementById('registration-form')?.scrollIntoView({behavior: 'smooth'})}
         >
-          Reserve Your Spot Now <ArrowRight size={16} />
+          Join the Workshop <ArrowRight size={16} />
         </Button>
       </div>
     </div>

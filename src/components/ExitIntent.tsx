@@ -55,7 +55,7 @@ const ExitIntent = () => {
           </div>
           
           <h3 className="text-2xl md:text-3xl font-bold text-navy mb-3">
-            Wait! You're About to Miss the Free AI Masterclass for AP Teams
+            Still thinking? Don't miss your free seat — Only 50 available!
           </h3>
           
           <p className="text-gray-600 mb-6">
@@ -64,7 +64,7 @@ const ExitIntent = () => {
           
           <div className="flex items-center justify-center mb-6 gap-4">
             <Clock size={20} className="text-dd-green" />
-            <p className="font-medium">June 11, 2025 – Limited Spots Left!</p>
+            <p className="font-medium">June 11 | 11:00 AM EST / 8:30 PM IST</p>
           </div>
           
           <Button 
@@ -74,7 +74,7 @@ const ExitIntent = () => {
               setIsVisible(false);
             }}
           >
-            Grab My Spot Before It's Gone
+            Save My Seat
           </Button>
         </div>
       </div>

@@ -4,10 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Lock } from 'lucide-react';
 
 const FinalCta = () => {
-  const [days, setDays] = useState(2);
-  const [hours, setHours] = useState(14);
-  const [minutes, setMinutes] = useState(37);
-  const [seconds, setSeconds] = useState(45);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -23,33 +19,6 @@ const FinalCta = () => {
     jobTitle: false
   });
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      } else {
-        setSeconds(59);
-        if (minutes > 0) {
-          setMinutes(minutes - 1);
-        } else {
-          setMinutes(59);
-          if (hours > 0) {
-            setHours(hours - 1);
-          } else {
-            setHours(23);
-            if (days > 0) {
-              setDays(days - 1);
-            } else {
-              clearInterval(timer);
-            }
-          }
-        }
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [days, hours, minutes, seconds]);
-  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -88,144 +57,167 @@ const FinalCta = () => {
   };
 
   return (
-    <section id="registration-form" className="py-20 px-4 sm:px-6 lg:px-8 bg-navy text-white">
+    <section id="registration-form" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-navy to-navy-800 text-white">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to See What You've Been Missing?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">Only 50 Spots Available — Reserve Yours Now</h2>
         
         <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
           Secure your spot in our next workshop and receive a complimentary AP leakage review after attending. No integration or commitment required.
         </p>
 
         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 mb-8 shadow-lg">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-navy-800 rounded-lg p-4 shadow-inner">
-              <div className="text-3xl font-bold">{days}</div>
-              <div className="text-gray-300 text-sm">Days</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <div className="bg-navy-800 rounded-lg p-6 shadow-inner mb-6">
+                <h3 className="text-2xl font-bold mb-4">Join the Workshop</h3>
+                <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center bg-navy-800/60 backdrop-blur-sm rounded-lg p-2 animate-float">
+                    <span className="text-dd-green text-xl mr-2">📅</span>
+                    <span>June 11 | 11:00 AM EST / 8:30 PM IST</span>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-dd-green/20 flex items-center justify-center mr-3">
+                      <span className="text-dd-green text-sm">✓</span>
+                    </div>
+                    <span>AI-driven AP automation techniques</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-dd-green/20 flex items-center justify-center mr-3">
+                      <span className="text-dd-green text-sm">✓</span>
+                    </div>
+                    <span>Dashboard creation workshop</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="h-6 w-6 rounded-full bg-dd-green/20 flex items-center justify-center mr-3">
+                      <span className="text-dd-green text-sm">✓</span>
+                    </div>
+                    <span>Live duplicate payment detection</span>
+                  </div>
+                </div>
+                <div className="mt-6 bg-dd-green/20 rounded-lg p-3">
+                  <div className="flex items-center">
+                    <span className="text-xl mr-2 animate-bounce">🎁</span>
+                    <span className="text-sm">Live attendees get an Apple Airtag + the AP Power Pack</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="bg-navy-800 rounded-lg p-4 shadow-inner">
-              <div className="text-3xl font-bold">{hours}</div>
-              <div className="text-gray-300 text-sm">Hours</div>
-            </div>
-            <div className="bg-navy-800 rounded-lg p-4 shadow-inner">
-              <div className="text-3xl font-bold">{minutes}</div>
-              <div className="text-gray-300 text-sm">Minutes</div>
-            </div>
-            <div className="bg-navy-800 rounded-lg p-4 shadow-inner">
-              <div className="text-3xl font-bold">{seconds}</div>
-              <div className="text-gray-300 text-sm">Seconds</div>
+            
+            <div>
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        id="first-name" 
+                        name="firstName" 
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        placeholder="First Name*" 
+                        className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
+                          formErrors.firstName ? 'border-red-500 ring-red-200' : 'border-gray-200'
+                        }`}
+                        required
+                      />
+                      {formErrors.firstName && (
+                        <p className="absolute -bottom-5 left-0 text-red-300 text-xs">First name is required</p>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        id="last-name" 
+                        name="lastName" 
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        placeholder="Last Name*" 
+                        className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
+                          formErrors.lastName ? 'border-red-500 ring-red-200' : 'border-gray-200'
+                        }`}
+                        required
+                      />
+                      {formErrors.lastName && (
+                        <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Last name is required</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="relative">
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Work Email*" 
+                    className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
+                      formErrors.email ? 'border-red-500 ring-red-200' : 'border-gray-200'
+                    }`}
+                    required
+                  />
+                  {formErrors.email && (
+                    <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Valid email is required</p>
+                  )}
+                </div>
+                
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    id="company" 
+                    name="company" 
+                    value={formData.company}
+                    onChange={handleChange}
+                    placeholder="Company Name*" 
+                    className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
+                      formErrors.company ? 'border-red-500 ring-red-200' : 'border-gray-200'
+                    }`}
+                    required
+                  />
+                  {formErrors.company && (
+                    <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Company name is required</p>
+                  )}
+                </div>
+                
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    id="job-title" 
+                    name="jobTitle" 
+                    value={formData.jobTitle}
+                    onChange={handleChange}
+                    placeholder="Job Title*" 
+                    className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
+                      formErrors.jobTitle ? 'border-red-500 ring-red-200' : 'border-gray-200'
+                    }`}
+                    required
+                  />
+                  {formErrors.jobTitle && (
+                    <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Job title is required</p>
+                  )}
+                </div>
+                
+                <div className="pt-4">
+                  <Button 
+                    className="w-full bg-gradient-to-r from-dd-green to-[#00a8a8] hover:from-[#00a8a8] hover:to-dd-green text-white font-medium py-6 rounded-lg hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg text-lg flex items-center justify-center gap-2"
+                    type="submit"
+                  >
+                    Join the Workshop <ArrowRight size={18} />
+                  </Button>
+                  
+                  <p className="flex items-center justify-center mt-4 text-sm text-gray-300">
+                    <Lock size={14} className="mr-1" /> 
+                    <span>Your information is secure. Limited to 50 seats per session.</span>
+                  </p>
+                </div>
+              </form>
             </div>
           </div>
-          
-          <form className="space-y-4 max-w-lg mx-auto" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    id="first-name" 
-                    name="firstName" 
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    placeholder="First Name*" 
-                    className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
-                      formErrors.firstName ? 'border-red-500 ring-red-200' : 'border-gray-200'
-                    }`}
-                    required
-                  />
-                  {formErrors.firstName && (
-                    <p className="absolute -bottom-5 left-0 text-red-300 text-xs">First name is required</p>
-                  )}
-                </div>
-              </div>
-              <div>
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    id="last-name" 
-                    name="lastName" 
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    placeholder="Last Name*" 
-                    className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
-                      formErrors.lastName ? 'border-red-500 ring-red-200' : 'border-gray-200'
-                    }`}
-                    required
-                  />
-                  {formErrors.lastName && (
-                    <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Last name is required</p>
-                  )}
-                </div>
-              </div>
-            </div>
-            
-            <div className="relative">
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Work Email*" 
-                className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
-                  formErrors.email ? 'border-red-500 ring-red-200' : 'border-gray-200'
-                }`}
-                required
-              />
-              {formErrors.email && (
-                <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Valid email is required</p>
-              )}
-            </div>
-            
-            <div className="relative">
-              <input 
-                type="text" 
-                id="company" 
-                name="company" 
-                value={formData.company}
-                onChange={handleChange}
-                placeholder="Company Name*" 
-                className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
-                  formErrors.company ? 'border-red-500 ring-red-200' : 'border-gray-200'
-                }`}
-                required
-              />
-              {formErrors.company && (
-                <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Company name is required</p>
-              )}
-            </div>
-            
-            <div className="relative">
-              <input 
-                type="text" 
-                id="job-title" 
-                name="jobTitle" 
-                value={formData.jobTitle}
-                onChange={handleChange}
-                placeholder="Job Title*" 
-                className={`w-full px-4 py-3 rounded-lg bg-white text-navy focus:outline-none focus:ring-2 focus:ring-dd-green border ${
-                  formErrors.jobTitle ? 'border-red-500 ring-red-200' : 'border-gray-200'
-                }`}
-                required
-              />
-              {formErrors.jobTitle && (
-                <p className="absolute -bottom-5 left-0 text-red-300 text-xs">Job title is required</p>
-              )}
-            </div>
-            
-            <div className="pt-4">
-              <Button 
-                className="w-full bg-gradient-to-r from-dd-green to-[#00a8a8] hover:from-[#00a8a8] hover:to-dd-green text-white font-medium py-6 rounded-lg hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg text-lg flex items-center justify-center gap-2"
-                type="submit"
-              >
-                Reserve My Free Seat <ArrowRight size={18} />
-              </Button>
-              
-              <p className="flex items-center justify-center mt-4 text-sm text-gray-300">
-                <Lock size={14} className="mr-1" /> 
-                <span>Your information is secure. Limited to 200 seats per session.</span>
-              </p>
-            </div>
-          </form>
         </div>
         
         {/* Testimonial quote callout */}

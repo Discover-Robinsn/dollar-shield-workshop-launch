@@ -108,32 +108,28 @@ const Hero = () => {
           <div className="text-white space-y-6">
             {/* Animation: Fade in from left */}
             <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl opacity-0 animate-fade-in">
-              Stop Losing Money in AP. Learn How to Fix It with AI.
+              Save 1 Hour a Day. Find $20K Hidden in Payments. In Just 1 Workshop.
             </h1>
             
             {/* Animation: Fade in with delay */}
             <p className="text-lg md:text-xl opacity-0 animate-fade-in animate-delay-200 text-gray-200">
-              Join our expert-led workshop and discover how AI is helping finance teams eliminate overpayments and streamline processes.
+              Join a live 60-minute AI workshop for AP leaders. Learn how to automate vendor queries, create stunning dashboards, and spot duplicates before recovery auditors do.
             </p>
             
             <div className="mt-2 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 opacity-0 animate-fade-in animate-delay-200">
               <div className="flex items-center">
                 <div className="bg-navy-800/60 backdrop-blur-sm rounded-lg p-2 flex items-center animate-float">
                   <span className="text-dd-green text-xl mr-2">📅</span>
-                  <span>June 11, 2025</span>
+                  <span>June 11 | 11:00 AM EST / 8:30 PM IST</span>
                 </div>
               </div>
-              <div className="flex items-center">
-                <div className="bg-navy-800/60 backdrop-blur-sm rounded-lg p-2 flex items-center animate-float" style={{ animationDelay: '0.2s' }}>
-                  <span className="text-dd-green text-xl mr-2">⏰</span>
-                  <span>11:00 AM EST</span>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="bg-navy-800/60 backdrop-blur-sm rounded-lg p-2 flex items-center animate-float" style={{ animationDelay: '0.4s' }}>
-                  <span className="text-dd-green text-xl mr-2">⌛</span>
-                  <span>1 Hour</span>
-                </div>
+            </div>
+            
+            {/* Gift box animation */}
+            <div className="pt-2 opacity-0 animate-fade-in animate-delay-300">
+              <div className="inline-flex items-center bg-navy-800/60 backdrop-blur-sm rounded-lg px-4 py-2">
+                <span className="text-xl mr-2 animate-bounce">🎁</span>
+                <span>Live attendees get an Apple Airtag + the AP Power Pack (Prompt Pack + Templates + Checklist)</span>
               </div>
             </div>
             
@@ -141,25 +137,45 @@ const Hero = () => {
             <div className="pt-4 opacity-0 animate-fade-in-up animate-delay-300">
               <Button 
                 ref={ctaButtonRef}
-                className="bg-dd-green hover:bg-dd-green-600 text-white font-medium px-6 py-6 rounded-lg hover-rise text-lg flex items-center gap-2 shadow-md hover:shadow-lg"
+                className="bg-gradient-to-r from-dd-green to-[#00a8a8] hover:from-[#00a8a8] hover:to-dd-green text-white font-medium px-6 py-6 rounded-lg hover-rise text-lg flex items-center gap-2 shadow-md hover:shadow-lg"
                 onClick={() => document.getElementById('registration-form')?.scrollIntoView({behavior: 'smooth'})}
               >
-                Reserve My Spot <ArrowRight className="ml-2" size={18} />
+                Reserve My Free Seat <ArrowRight className="ml-2" size={18} />
               </Button>
               
-              <p className="mt-4 text-gray-200 text-sm">Free registration • Limited to 200 seats • Includes $20K+ worth of insights</p>
+              {/* Progress bar */}
+              <div className="mt-6 w-full bg-gray-200 rounded-full h-3 relative overflow-hidden">
+                <div className="bg-dd-green h-3 rounded-full animate-pulse" style={{ width: '40%' }}></div>
+              </div>
+              <p className="mt-2 text-red-300 text-sm flex items-center animate-pulse">
+                <span className="mr-1">🚨</span> 40% of Seats Filled – Reserve Fast
+              </p>
             </div>
             
             {/* Target audience label */}
             <div className="pt-2 opacity-0 animate-fade-in animate-delay-500">
               <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 text-sm">
-                Unlock AI-Driven Insights in AP in Just 60 Minutes
+                Limited to just 50 spots - Reserve yours now!
               </div>
             </div>
           </div>
 
           <div className="hidden lg:block opacity-0 animate-fade-in animate-delay-400">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-xl">
+              <div className="flex items-center justify-center mb-8">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 shadow-lg">
+                  {/* Placeholder for Subu Rao's headshot - replace with actual image */}
+                  <img 
+                    src="/subu-rao-headshot.jpg" 
+                    alt="Subu Rao, CEO of Discover Dollar" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback if image doesn't load
+                      e.currentTarget.src = "https://via.placeholder.com/128?text=Subu+Rao";
+                    }}
+                  />
+                </div>
+              </div>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <div className="bg-navy-100 p-3 rounded-full">
@@ -168,7 +184,7 @@ const Hero = () => {
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <p className="text-white font-medium">Upload AP Data</p>
+                    <p className="text-white font-medium">Automate Vendor Queries</p>
                     <div className="bg-gray-300 h-1 w-20 mt-1">
                       <div className="bg-dd-green h-1 w-20 animate-pulse"></div>
                     </div>
@@ -182,7 +198,7 @@ const Hero = () => {
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <p className="text-white font-medium">Error Flags</p>
+                    <p className="text-white font-medium">Build Stunning Dashboards</p>
                     <div className="bg-gray-300 h-1 w-20 mt-1">
                       <div className="bg-dd-gold h-1 w-16 animate-pulse"></div>
                     </div>
@@ -196,7 +212,7 @@ const Hero = () => {
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <p className="text-white font-medium">$ Recovery</p>
+                    <p className="text-white font-medium">Identify $20K+ in Duplicates</p>
                     <div className="bg-gray-300 h-1 w-20 mt-1">
                       <div className="bg-dd-green h-1 w-12 animate-pulse"></div>
                     </div>
