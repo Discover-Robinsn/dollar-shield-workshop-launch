@@ -55,6 +55,7 @@ const KpiSection = () => {
   const [counting, setCounting] = useState(false);
   const [counts, setCounts] = useState<number[]>(kpis.map(() => 0));
   const kpiRef = useRef<HTMLDivElement>(null);
+  const clientLogosRef = useRef<HTMLDivElement>(null);
 
   // Counter animation
   useEffect(() => {
@@ -84,8 +85,18 @@ const KpiSection = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setCounting(true);
-            entry.target.classList.add('animate-fade-in');
+            if (entry.target === kpiRef.current) {
+              setCounting(true);
+              entry.target.classList.add('animate-fade-in');
+            } else if (entry.target === clientLogosRef.current) {
+              // Add animation to logos
+              const logos = entry.target.querySelectorAll('.logo-item');
+              logos.forEach((logo, index) => {
+                setTimeout(() => {
+                  logo.classList.add('opacity-100', 'transform-none');
+                }, index * 100);
+              });
+            }
             observer.unobserve(entry.target);
           }
         });
@@ -96,10 +107,17 @@ const KpiSection = () => {
     if (kpiRef.current) {
       observer.observe(kpiRef.current);
     }
+    
+    if (clientLogosRef.current) {
+      observer.observe(clientLogosRef.current);
+    }
 
     return () => {
       if (kpiRef.current) {
         observer.unobserve(kpiRef.current);
+      }
+      if (clientLogosRef.current) {
+        observer.unobserve(clientLogosRef.current);
       }
     };
   }, []);
@@ -135,14 +153,13 @@ const KpiSection = () => {
             <p className="text-center text-lg font-medium text-gray-700 mb-6">
               Trusted by industry leaders
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-8">
+            <div ref={clientLogosRef} className="flex flex-wrap justify-center items-center gap-6">
               {clientLogos.map((logo, index) => (
                 <div 
                   key={index}
-                  className="text-gray-400 font-semibold text-lg opacity-0 animate-fade-in"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="logo-item bg-white rounded-full px-6 py-3 shadow-sm hover:shadow-md transition-all duration-300 transform opacity-0 translate-y-4 hover:scale-110"
                 >
-                  {logo}
+                  <span className="text-gray-600 font-medium whitespace-nowrap">{logo}</span>
                 </div>
               ))}
             </div>

@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Ticket } from 'lucide-react';
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const FloatingCta = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,9 +24,12 @@ const FloatingCta = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Don't render on mobile
+  if (isMobile) return null;
+
   return (
     <div 
-      className={`fixed bottom-24 sm:bottom-20 right-6 z-[60] transition-all duration-500 ${
+      className={`fixed bottom-32 sm:bottom-28 right-6 z-[100] transition-all duration-500 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
       }`}
     >
