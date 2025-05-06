@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const MeetHost = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-5xl mx-auto">
@@ -12,7 +15,7 @@ const MeetHost = () => {
         
         <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden bg-white border-0">
           <CardContent className="p-0">
-            <div className="grid md:grid-cols-2 gap-6 items-center">
+            <div className={`grid ${isMobile ? '' : 'md:grid-cols-2'} gap-6 items-center`}>
               <div className="p-6 md:p-8">
                 <div className="space-y-4">
                   <p className="text-xl text-gray-700 italic">
@@ -30,13 +33,13 @@ const MeetHost = () => {
                 </div>
               </div>
               
-              <div className="h-full">
-                {/* Replace with actual image of Subu Rao */}
-                <div className="h-full min-h-[300px] bg-navy-50 relative overflow-hidden">
+              <div className={`${isMobile ? 'h-60' : 'h-full'} flex items-center justify-center`}>
+                {/* Optimized image display for mobile and desktop */}
+                <div className={`${isMobile ? 'h-full w-60 mx-auto rounded-full overflow-hidden' : 'h-full min-h-[300px] w-full'} bg-navy-50 relative`}>
                   <img 
-                    src="/subu-rao-full.jpg"
+                    src="/lovable-uploads/81262a85-6b0a-447b-ba73-d8acec79da4d.png"
                     alt="Subu Rao, CEO of Discover Dollar" 
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full ${isMobile ? 'object-cover object-top' : 'object-cover'}`}
                     onError={(e) => {
                       // Fallback if image doesn't load
                       e.currentTarget.src = "https://via.placeholder.com/600x400?text=Subu+Rao";
