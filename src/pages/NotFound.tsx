@@ -1,17 +1,16 @@
 
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
-  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
+      "404 Error: User attempted to access non-existent route"
     );
-  }, [location.pathname]);
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -23,7 +22,7 @@ const NotFound = () => {
         </p>
         <Button 
           className="bg-dd-green hover:bg-dd-green-600 text-white"
-          onClick={() => window.location.href = "/dollar-shield-workshop-launch/"}
+          onClick={() => navigate("/")}
         >
           Return to Home
         </Button>
