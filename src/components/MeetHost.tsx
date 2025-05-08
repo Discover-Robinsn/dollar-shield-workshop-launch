@@ -38,7 +38,7 @@ const MeetHost = () => {
                 {isMobile ? (
                   <div className="mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg">
                     <img 
-                      src="/lovable-uploads/c276074a-d9e3-4adf-8192-388263f3842f.png"
+                      src="/lovable-uploads/b42b640a-4f05-4e3a-b1ab-c61ed8184594.png"
                       alt="Subu Rao, CEO of Discover Dollar" 
                       className="w-full h-full object-cover object-center"
                       onError={(e) => {
@@ -50,7 +50,7 @@ const MeetHost = () => {
                   // Regular image for desktop view
                   <div className="h-full min-h-[300px] w-full overflow-hidden">
                     <img 
-                      src="/lovable-uploads/c276074a-d9e3-4adf-8192-388263f3842f.png"
+                      src="/lovable-uploads/b42b640a-4f05-4e3a-b1ab-c61ed8184594.png"
                       alt="Subu Rao, CEO of Discover Dollar" 
                       className="w-full h-full object-cover"
                       onError={(e) => {
